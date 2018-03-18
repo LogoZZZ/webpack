@@ -1,0 +1,8 @@
+npm install --save-dev webpack
+如果版本为4+
+npm install --save-dev webpack-cli
+
+package.json :
+"scripts": {
+    "start": "webpack --config webpack.config.js"
+}

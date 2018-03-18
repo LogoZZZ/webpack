@@ -1,0 +1,35 @@
+一般将配置文件分成三个 通过下面这个插件
+npm install --save-dev webpack-merge
+
++ |- webpack.common.js
++ |- webpack.dev.js
++ |- webpack.prod.js
+
+webpack.common.js写入基本配置（入口出口，插件）
++ const path = require('path');
++ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const HtmlWebpackPlugin = require('html-webpack-plugin');
+webpack.dev.js 写入服务配置（如服务器，查错）-需先引入webpack.common.js这个基本配置
++ const merge = require('webpack-merge');
++ const common = require('./webpack.common.js');
++ module.exports = merge(common, {})
+webpack.prod.js 写入输出配置
++ const merge = require('webpack-merge');
++ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
++ const common = require('./webpack.common.js');
++ module.exports = merge(common, {})
+
+
+随后更改package文件
+-     "start": "webpack-dev-server --open",
++     "start": "webpack-dev-server --open --config webpack.dev.js",  启动服务
+-     "build": "webpack"
++     "build": "webpack --config webpack.prod.js"   打包文件
+
+source-map检查构建时的错误
++   devtool: 'source-map',
+    plugins: [
+-     new UglifyJSPlugin()
++     new UglifyJSPlugin({
++       sourceMap: true
++     })

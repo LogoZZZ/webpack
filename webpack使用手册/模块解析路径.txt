@@ -1,0 +1,15 @@
+绝对路径
+import "/home/me/file";
+
+import "C:\\Users\\me\\file";
+由于我们已经取得文件的绝对路径，因此不需要进一步再做解析。
+
+相对路径
+import "../src/file1";
+import "./file2";
+在这种情况下，使用 import 或 require 的资源文件(resource file)所在的目录被认为是上下文目录(context directory)。在 import/require 中给定的相对路径，会添加此上下文路径(context path)，以产生模块的绝对路径(absolute path)。
+
+模块路径
+import "module";
+import "module/lib/file";
+模块将在 resolve.modules 中指定的所有目录内搜索。 你可以替换初始模块路径，此替换路径通过使用 resolve.alias 配置选项来创建一个别名。

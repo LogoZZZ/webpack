@@ -1,0 +1,83 @@
+loader模块
+loader：
+ module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  }
+
+//两个值 test和use
+test：用正则表达式标出应该被loader进行转换的某个文件或某些文件
+use：表示进行转换时用哪个loader如
+
+ module:{
+     rules:[
+         {
+             test:/\.css$/,
+             use:[
+                 'style-loader',
+                 'css-loader'
+             ]
+         }
+      ]
+}
+
+npm install --save-dev css-loader        作用webpack 加载 CSS 文件
+npm install --save-dev ts-loader         作用将 TypeScript 转为 JavaScript
+npm install --save-dev babel-loader      加载 ES2015+ 代码，然后使用 Babel 转译为 ES5
+                       style-loader      将模块的导出作为样式添加到 DOM 中
+                       less-loader       加载和转译 LESS 文件
+                       sass-loader      加载和转译 SASS/SCSS 文件
+					   vue-loader       加载和转译 Vue 组件
+npm install --save-dev file-loader        图片/字体
+npm install --save-dev csv-loader xml-loader  加载数据，xml格式或者csv，tsv（json默认支持）
+使用：
+  module: {
+    rules: [
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' }，
+	   {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        },
+       {
+         test: /\.(woff|woff2|eot|ttf|otf)$/,
+         use: [
+           'file-loader'
+         ]
+       },
+	     {
+         test: /\.(csv|tsv)$/,
+         use: [
+           'csv-loader'
+         ]
+       },
+       {
+         test: /\.xml$/,
+         use: [
+           'xml-loader'
+         ]
+       }
+    ]
+  }
+  
+  js的工具库
+ npm install --save lodash   一个js的工具库
+ 
+ 插件
+ npm install --save-dev html-webpack-plugin   自动化构建index.html
+ 使用：
+   const HtmlWebpackPlugin = require('html-webpack-plugin');
+ plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Output Management'
+    })
+   ],
+   
+   
+   npm install clean-webpack-plugin --save-dev  清理dist文件，把没有依赖的多余文件删除
+   使用：
+   const CleanWebpackPlugin = require('clean-webpack-plugin');
+    new CleanWebpackPlugin(['dist']),
